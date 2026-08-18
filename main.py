@@ -18,12 +18,13 @@ while True:
     if answer_state in states.values:
         print("It does exsist")
         state = turtle.Turtle()
+        state.hideturtle()
         state.penup()
         x_cor = data[data.state == answer_state].x
         y_cor = data[data.state == answer_state].y
-        print(f"{x_cor} {y_cor}")
-        # state.goto(x_cor, y_cor)
-        # state.write(answer_state, font=("Arial", 16, "normal"))
+        print(f"X: {x_cor.iat[0]} y:{y_cor.iat[0]}")
+        state.goto(x_cor.iat[0], y_cor.iat[0])
+        state.write(answer_state, font=("Arial", 16, "normal"))
     else:
         print("Does not exsist")
 
