@@ -10,22 +10,18 @@ turtle.shape(image)
 
 data = pandas.read_csv("50_states.csv")
 
-while True:
-    answer_state = screen.textinput("Guess the State", "What's another state's name?").title()
+correct_states = []
 
-    states = data.state
+while True:
+    states = data.state # Or do all_states = data.state.to_list()
+    answer_state = screen.textinput(f"{len(correct_states)}/{len(states.values)} States Correct", "What's another state's name?").title()
 
     if answer_state in states.values:
-        print("It does exsist")
         state = turtle.Turtle()
         state.hideturtle()
         state.penup()
-        x_cor = data[data.state == answer_state].x
-        y_cor = data[data.state == answer_state].y
-        print(f"X: {x_cor.iat[0]} y:{y_cor.iat[0]}")
-        state.goto(x_cor.iat[0], y_cor.iat[0])
-        state.write(answer_state, font=("Arial", 16, "normal"))
-    else:
-        print("Does not exsist")
-
-turtle.mainloop()
+        x_cor = data[data.state == answer_state].x.item()
+        y_cor = data[data.state == answer_state].y.item()
+        state.goto(x_cor, y_cor)
+        state.write(answer_state, font=("Arial", 12, "normal"))
+        correct_states.append(answer_state)
